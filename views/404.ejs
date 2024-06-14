@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1c1c1c, #3a3a3a);
+            color: white;
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+        }
+        .cacodemon {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        .home-link {
+            color: #ff0000;
+            text-decoration: none;
+            font-size: 20px;
+            border: 2px solid #ff0000;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .home-link:hover {
+            background-color: #ff0000;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404 - Page Not Found</h1>
+        <img src="images/cacodemon.png" alt="Cacodemon" class="cacodemon">
+        <div class="message">
+            Oops! Looks like a Cacodemon swallowed this page.
+        </div>
+        <a href="/" class="home-link">Go back to the homepage before it gets you!</a>
+    </div>
+</body>
+</html>
