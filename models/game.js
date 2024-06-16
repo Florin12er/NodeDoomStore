@@ -11,7 +11,22 @@ const GameSchema = new mongoose.Schema({
   },
   platforms: {
     type: String,
-    required: true,
+  },
+  requirements: {
+    type: String,
+  },
+  coverImage: {
+    type: Buffer,
+  },
+  coverImageType: {
+    type: String,
   },
 });
-module.exports = mongoose.model('Game', GameSchema)
+GameSchema.virtual('coverImagePath').get(function() {
+  if (this.coverImage != null && this.coverImageType != null) {
+    return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`
+  }
+})
+
+
+module.exports = mongoose.model("Game", GameSchema);

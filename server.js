@@ -17,6 +17,7 @@ const Games = require("./routes/games")
 const Demons = require("./routes/demons")
 const Levels = require("./routes/levels")
 const Mods = require("./routes/mods")
+const SourcePorts = require("./routes/sourcePorts")
 
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
@@ -29,6 +30,7 @@ app.use("/games", Games)
 app.use("/demons", Demons)
 app.use("/levels", Levels)
 app.use("/mods", Mods)
+app.use("/source", SourcePorts)
 
 app.use((req, res, next) => {
     res.status(404).render("404", { layout: false });

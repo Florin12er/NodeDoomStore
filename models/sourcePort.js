@@ -1,11 +1,19 @@
 const mongoose = require("mongoose");
 
-const Demon = new mongoose.Schema({
+const SourcePort = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
   description: {
+    type: String,
+    required: true,
+  },
+  requirements: {
+    type: String,
+    required: true,
+  },
+  platforms: {
     type: String,
     required: true,
   },
@@ -18,4 +26,4 @@ const Demon = new mongoose.Schema({
     required: true,
   },
 });
-module.exports = mongoose.model("demon", Demon);
+module.exports = mongoose.model("SourcePort", SourcePort);
