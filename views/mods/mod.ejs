@@ -1,1 +1,17 @@
+<title>Mods</title>
 <h1>Mods:</h1>
+  <a href="/mods/new">Add New Mod</a>
+  <ul>
+    <% mods.forEach(modsItems => { %>
+      <li>
+        <h2><%= modsItems.title %></h2>
+        <p><%= modsItems.description %></p>
+        <p><strong>Compatibility:</strong> <%= modsItems.compatibility %></p>
+        <p><strong>Requirements:</strong> <%= modsItems.requirements %></p>
+        <% if (modsItems.coverImageType && modsItems.coverImage) { %>
+          <img src="data:<%= modsItems.coverImageType %>;base64,<%= modsItems.coverImage.toString('base64') %>" alt="<%= modsItems.title %> Cover Image" style="width: 200px;">
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+

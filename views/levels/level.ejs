@@ -1,1 +1,15 @@
+<title>Levels</title>
 <h1>Levels:</h1>
+  <a href="/levels/new">Add New Level</a>
+  <ul>
+    <% levels.forEach(levelItem => { %>
+      <li>
+        <h2><%= levelItem.title %></h2>
+        <p><%= levelItem.description %></p>
+        <% if (levelItem.coverImageType && levelItem.coverImage) { %>
+          <img src="data:<%= levelItem.coverImageType %>;base64,<%= levelItem.coverImage.toString('base64') %>" alt="<%= levelItem.title %> Cover Image" style="width: 200px;">
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+
