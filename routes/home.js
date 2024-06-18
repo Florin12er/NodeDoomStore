@@ -7,14 +7,11 @@ const SourcePort = require("../models/sourcePort");
 const Mods = require("../models/mod");
 
 router.get("/", async (req, res) => {
-    const searchOptions = {};
     const { title } = req.query;
 
-    if (title) {
-        searchOptions.title = new RegExp(title, "i");
-    }
-
     try {
+        const searchOptions = title ? { title: new RegExp(title, "i") } : {};
+
         const [games, levels, demons, source, mods] = await Promise.all([
             Game.find(searchOptions),
             Level.find(searchOptions),
@@ -36,5 +33,4 @@ router.get("/", async (req, res) => {
         res.redirect("/");
     }
 });
-
 module.exports = router;

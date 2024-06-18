@@ -1,19 +1,45 @@
-<h2 class="page-header">Edit Game</h2>
-<form action="/levels/<%= level.id %>?_method=PUT" method="POST">
-<div class="form-row">
-  <div class="form-item">
-    <label>Name</label>
-    <input type="text" name="title" value="<%= level.title %>" />
-    <label class="description">Description</label>
-    <textarea name="description" class="textarea-description"><%= level.description  %></textarea>
-<label>Platforms</label>
-    <input type="text" name="platforms" value="<%= level.platforms %>" />
-<label>Name</label>
-    <input type="text" name="requirements" value="<%= level.requirements %>" />
-  </div>
-</div>
-  <div class="form-row form-row-end btn-row">
-    <a class="btn btn-danger" href="/levels/<%= level.id %>">Cancel</a>
-    <button class="btn btn-primary" type="submit">Update</button>
-  </div>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Level</title>
+</head>
+
+<body>
+    <h2 class="page-header">Edit Level</h2>
+    <form action="/levels/<%= level.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-item">
+                <label for="title">Name</label>
+                <input type="text" id="title" name="title" value="<%= level.title %>" required />
+            </div>
+            <div class="form-item">
+                <label for="description" class="description">Description</label>
+                <textarea id="description" name="description" class="textarea-description" required><%= level.description %></textarea>
+            </div>
+            <div class="form-item">
+                <label for="game">Game</label>
+                <select id="game" name="gameId" required>
+                    <% games.forEach(game => { %>
+                        <option value="<%= game._id %>" <%= game._id.equals(level.game) ? 'selected' : '' %>><%= game.title %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="form-item">
+                <label for="coverImage">Cover Image</label>
+                <% if (level.coverImageType && level.coverImage) { %>
+                    <img src="data:<%= level.coverImageType %>;base64,<%= level.coverImage.toString('base64') %>" alt="<%= level.title %> Cover Image" style="width: 200px;">
+                <% } %>
+                <input type="file" id="coverImage" name="coverImage">
+            </div>
+        </div>
+        <div class="form-row form-row-end btn-row">
+            <a class="btn btn-danger" href="/levels/<%= level.id %>">Cancel</a>
+            <button class="btn btn-primary" type="submit">Update</button>
+        </div>
+    </form>
+</body>
+</html>
+

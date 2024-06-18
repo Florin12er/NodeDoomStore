@@ -36,7 +36,6 @@ router.get("/", async (req, res) => {
     res.redirect("/");
   }
 });
-
 // Display form for creating a new game
 router.get("/new", (req, res) => {
   res.render("games/new", { game: new Game() });

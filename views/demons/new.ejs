@@ -13,27 +13,34 @@
         <p>
             <%= locals.errorMessage %>
         </p>
-        <% } %>
-            <form action="/demons" method="POST" enctype="multipart/form-data">
-                <div>
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" value="<%= demons.title %>" required>
-                </div>
-                <div>
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" required>
-                        <%= demons.description %>
-                    </textarea>
-                </div>
-                <div>
-                    <label for="coverImage">Cover Image</label>
-                    <img id="preview" src="" alt="Image Preview" />
-                    <input type="file" id="coverimage" name="coverImage">
-                </div>
-                <div>
-                    <button type="submit">Add Demon</button>
-                </div>
-            </form>
+    <% } %>
+    <form action="/demons" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" value="<%= demon.title %>" required>
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required><%= demon.description %></textarea>
+        </div>
+        <div>
+            <label for="game">Game</label>
+            <select id="game" name="gameId" required>
+                <% games.forEach(game => { %>
+                    <option value="<%= game._id %>"><%= game.title %></option>
+                <% }) %>
+            </select>
+        </div>
+        <div>
+            <label for="coverImage">Cover Image</label>
+            <img id="preview" src="" alt="Image Preview" />
+            <input type="file" id="coverimage" name="coverImage">
+        </div>
+        <div>
+            <button type="submit">Add Demon</button>
+        </div>
+    </form>
 </body>
 
 </html>
+
