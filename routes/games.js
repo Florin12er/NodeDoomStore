@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const Game = require("../models/game");
+const methodOverride = require('method-override');
+
+
+// Set up method-override
+router.use(methodOverride('_method'));
 
 // Set up multer for file uploads
 const upload = multer({
@@ -26,7 +31,8 @@ router.get("/", async (req, res) => {
       games: games,
       searchOptions: req.query,
     });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.redirect("/");
   }
 });
@@ -53,11 +59,70 @@ router.post("/", upload.single('coverImage'), async (req, res) => {
   try {
     const newGame = await game.save();
     res.redirect("games");
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.render("games/new", {
       game: game,
       errorMessage: "Error creating game. Make sure to fill all fields.",
     });
+  }
+});
+
+// Display form to edit a game
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const game = await Game.findById(req.params.id);
+    res.render("games/edit", { game: game });
+  } catch (error) {
+    console.error(error);
+    res.redirect("/games");
+  }
+});
+
+// Handle game update
+router.put("/:id", upload.single('coverImage'), async (req, res) => {
+  let game;
+  try {
+    game = await Game.findById(req.params.id);
+    game.title = req.body.title;
+    game.description = req.body.description;
+    game.platforms = req.body.platforms;
+    game.requirements = req.body.requirements;
+
+    if (req.file != null) {
+      game.coverImage = req.file.buffer;
+      game.coverImageType = req.file.mimetype;
+    }
+
+    await game.save();
+    res.redirect(`/games`);
+  } catch (error) {
+    console.error(error);
+    if (game == null) {
+      res.redirect("/");
+    } else {
+      res.render("games/edit", {
+        game: game,
+        errorMessage: "Error updating game",
+      });
+    }
+  }
+});
+
+// Handle game deletion
+router.delete("/:id", async (req, res) => {
+  let game;
+  try {
+    game = await Game.findById(req.params.id);
+    await game.deleteOne();
+    res.redirect("/games");
+  } catch (error) {
+    console.error(error);
+    if (game == null) {
+      res.redirect("/");
+    } else {
+      res.redirect(`/games/${game.id}`);
+    }
   }
 });
 

@@ -1,0 +1,19 @@
+<h2 class="page-header">Edit Game</h2>
+<form action="/levels/<%= level.id %>?_method=PUT" method="POST">
+<div class="form-row">
+  <div class="form-item">
+    <label>Name</label>
+    <input type="text" name="title" value="<%= level.title %>" />
+    <label class="description">Description</label>
+    <textarea name="description" class="textarea-description"><%= level.description  %></textarea>
+<label>Platforms</label>
+    <input type="text" name="platforms" value="<%= level.platforms %>" />
+<label>Name</label>
+    <input type="text" name="requirements" value="<%= level.requirements %>" />
+  </div>
+</div>
+  <div class="form-row form-row-end btn-row">
+    <a class="btn btn-danger" href="/levels/<%= level.id %>">Cancel</a>
+    <button class="btn btn-primary" type="submit">Update</button>
+  </div>
+</form>

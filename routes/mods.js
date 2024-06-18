@@ -60,5 +60,63 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
         });
     }
 });
+// Display form to edit a mod
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const mod = await Mods.findById(req.params.id);
+    res.render("mods/edit", { mod: mod });
+  } catch (error) {
+    console.error(error);
+    res.redirect("/mods");
+  }
+});
+
+// Handle mod update
+router.put("/:id", upload.single('coverImage'), async (req, res) => {
+  let mod;
+  try {
+    mod = await Mods.findById(req.params.id);
+    mod.title = req.body.title;
+    mod.description = req.body.description;
+    mod.platforms = req.body.platforms;
+    mod.requirements = req.body.requirements;
+
+    if (req.file != null) {
+      mod.coverImage = req.file.buffer;
+      mod.coverImageType = req.file.mimetype;
+    }
+
+    await mod.save();
+    res.redirect(`/mods`);
+  } catch (error) {
+    console.error(error);
+    if (mod == null) {
+      res.redirect("/");
+    } else {
+      res.render("mods/edit", {
+        mod: mod,
+        errorMessage: "Error updating mod",
+      });
+    }
+  }
+});
+
+// Handle mod deletion
+router.delete("/:id", async (req, res) => {
+  let mod;
+  try {
+    mod = await Mods.findById(req.params.id);
+    await mod.deleteOne();
+    res.redirect("/mods");
+  } catch (error) {
+    console.error(error);
+    if (mod == null) {
+      res.redirect("/");
+    } else {
+      res.redirect(`/mods/${mod.id}`);
+    }
+  }
+});
+
 
 module.exports = router;

@@ -60,6 +60,63 @@ router.post("/", upload.single('coverImage'), async (req, res) => {
     });
   }
 });
+// Display form to edit a source
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const source = await SourcePort.findById(req.params.id);
+    res.render("source/edit", { source: source });
+  } catch (error) {
+    console.error(error);
+    res.redirect("/source");
+  }
+});
+
+// Handle source update
+router.put("/:id", upload.single('coverImage'), async (req, res) => {
+  let source;
+  try {
+    source = await SourcePort.findById(req.params.id);
+    source.title = req.body.title;
+    source.description = req.body.description;
+    source.platforms = req.body.platforms;
+    source.requirements = req.body.requirements;
+
+    if (req.file != null) {
+      source.coverImage = req.file.buffer;
+      source.coverImageType = req.file.mimetype;
+    }
+
+    await source.save();
+    res.redirect(`/source`);
+  } catch (error) {
+    console.error(error);
+    if (source == null) {
+      res.redirect("/");
+    } else {
+      res.render("sourcePorts/edit", {
+        source: source,
+        errorMessage: "Error updating source",
+      });
+    }
+  }
+});
+
+// Handle source deletion
+router.delete("/:id", async (req, res) => {
+  let source;
+  try {
+    source = await SourcePort.findById(req.params.id);
+    await source.deleteOne();
+    res.redirect("/source");
+  } catch (error) {
+    console.error(error);
+    if (source == null) {
+      res.redirect("/");
+    } else {
+      res.redirect(`/source/${source.id}`);
+    }
+  }
+});
 
 module.exports = router;
 

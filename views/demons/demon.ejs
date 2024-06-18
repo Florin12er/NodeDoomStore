@@ -1,4 +1,17 @@
 <title>Demons</title>
+<h2 class="page-header">Search Demons</h2>
+<form action="/demons" method="GET">
+  <div class="form-row">
+    <div class="form-item">
+      <label>Name</label>
+      <input type="text" name="title" value="<%= searchOptions.title %>" />
+    </div>
+  </div>
+  <div class="form-row form-row-end">
+    <button class="btn btn-primary" type="submit">Search</button>
+  </div>
+</form>
+<br />
 <h1>Demons:</h1>
   <a href="/demons/new">Add New Level</a>
   <ul>
@@ -9,6 +22,10 @@
         <% if (demonItem.coverImageType && demonItem.coverImage) { %>
           <img src="data:<%= demonItem.coverImageType %>;base64,<%= demonItem.coverImage.toString('base64') %>" alt="<%= demonItem.title %> Cover Image" style="width: 200px;">
         <% } %>
+        <div>
+          <a class="btn btn-primary" href="/demons/<%= demonItem._id %>/edit">Edit</a>
+          <%- include('../partials/deleteForm', { url: `/demons/${demonItem._id}` }) %>
+        </div>
       </li>
     <% }) %>
   </ul>

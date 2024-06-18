@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add New Game</title>
-</head>
-<body>
-  <h1>Add New Game</h1>
-  <% if (locals.errorMessage) { %>
-    <p><%= locals.errorMessage %></p>
-  <% } %>
-  <form action="/games" method="POST" enctype="multipart/form-data">
-    <div>
-      <label for="title">Title</label>
-      <input type="text" id="title" name="title" value="<%= game.title %>" required>
-    </div>
-    <div>
-      <label for="description">Description</label>
-      <textarea id="description" name="description" required><%= game.description %></textarea>
-    </div>
-    <div>
-      <label for="platforms">Platforms</label>
-      <input type="text" id="platforms" name="platforms" value="<%= game.platforms %>">
-    </div>
-    <div>
-      <label for="requirements">Requirements</label>
-      <input type="text" id="requirements" name="requirements" value="<%= game.requirements %>">
-    </div>
-    <div>
-      <label for="coverImage">Cover Image</label>
-      <input type="file" id="coverimage" name="coverImage">
-    </div>
-    <div>
-      <button type="submit">Add Game</button>
-    </div>
-  </form>
-</body>
-</html>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Game</title>
+</head>
+
+<body>
+    <h1>Add New Game</h1>
+    <% if (locals.errorMessage) { %>
+        <p>
+            <%= locals.errorMessage %>
+        </p>
+        <% } %>
+            <form action="/games" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" value="<%= game.title %>" required>
+                </div>
+                <div>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" required>
+                        <%= game.description %>
+                    </textarea>
+                </div>
+                <div>
+                    <label for="platforms">Platforms</label>
+                    <input type="text" id="platforms" name="platforms" value="<%= game.platforms %>">
+                </div>
+                <div>
+                    <label for="requirements">Requirements</label>
+                    <input type="text" id="requirements" name="requirements" value="<%= game.requirements %>">
+                </div>
+                <div>
+                    <img id="preview" src="" alt="Image Preview" />
+                    <input type="file" id="coverimage" name="coverImage">
+                </div>
+                <div>
+                    <button type="submit">Add Game</button>
+                </div>
+            </form>
+</body>
+
+</html>

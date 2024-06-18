@@ -55,6 +55,64 @@ router.post("/", upload.single('coverImage'), async (req, res) => {
   }
 });
 
+// Display form to edit a demon
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const demon = await Demon.findById(req.params.id);
+    res.render("demons/edit", { demon: demon });
+  } catch (error) {
+    console.error(error);
+    res.redirect("/demons");
+  }
+});
+
+// Handle demon update
+router.put("/:id", upload.single('coverImage'), async (req, res) => {
+  let demon;
+  try {
+    demon = await Demon.findById(req.params.id);
+    demon.title = req.body.title;
+    demon.description = req.body.description;
+    demon.platforms = req.body.platforms;
+    demon.requirements = req.body.requirements;
+
+    if (req.file != null) {
+      demon.coverImage = req.file.buffer;
+      demon.coverImageType = req.file.mimetype;
+    }
+
+    await demon.save();
+    res.redirect(`/demons`);
+  } catch (error) {
+    console.error(error);
+    if (demon == null) {
+      res.redirect("/");
+    } else {
+      res.render("demons/edit", {
+        demon: demon,
+        errorMessage: "Error updating demon",
+      });
+    }
+  }
+});
+
+// Handle demon deletion
+router.delete("/:id", async (req, res) => {
+  let demon;
+  try {
+    demon = await Demon.findById(req.params.id);
+    await demon.deleteOne();
+    res.redirect("/demons");
+  } catch (error) {
+    console.error(error);
+    if (demon == null) {
+      res.redirect("/");
+    } else {
+      res.redirect(`/demons/${demon.id}`);
+    }
+  }
+});
+
 
 module.exports = router
 

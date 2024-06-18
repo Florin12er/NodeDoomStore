@@ -5,12 +5,15 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts")
 const app = express();
+const methodOverride = require('method-override');
+
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views")
 app.set("layout", "layouts/layout");
 app.use(expressLayouts)
 app.use(express.static("public"))
+app.use(methodOverride('_method'));
 
 const Home = require("./routes/home")
 const Games = require("./routes/games")

@@ -1,5 +1,18 @@
 <title>Levels</title>
 <h1>Levels:</h1>
+<h2 class="page-header">Search Levels</h2>
+<form action="/levels" method="GET">
+  <div class="form-row">
+    <div class="form-item">
+      <label>Name</label>
+      <input type="text" name="title" value="<%= searchOptions.title %>" />
+    </div>
+  </div>
+  <div class="form-row form-row-end">
+    <button class="btn btn-primary" type="submit">Search</button>
+  </div>
+</form>
+<br />
   <a href="/levels/new">Add New Level</a>
   <ul>
     <% levels.forEach(levelItem => { %>
@@ -9,6 +22,10 @@
         <% if (levelItem.coverImageType && levelItem.coverImage) { %>
           <img src="data:<%= levelItem.coverImageType %>;base64,<%= levelItem.coverImage.toString('base64') %>" alt="<%= levelItem.title %> Cover Image" style="width: 200px;">
         <% } %>
+        <div>
+          <a class="btn btn-primary" href="/levels/<%= levelItem._id %>/edit">Edit</a>
+          <%- include('../partials/deleteForm', { url: `/levels/${levelItem._id}` }) %>
+        </div>
       </li>
     <% }) %>
   </ul>

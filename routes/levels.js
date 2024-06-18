@@ -53,6 +53,64 @@ router.post("/", upload.single('coverImage'), async (req, res) => {
     });
   }
 });
+// Display form to edit a level
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const level = await Level.findById(req.params.id);
+    res.render("levels/edit", { level: level });
+  } catch (error) {
+    console.error(error);
+    res.redirect("/levels");
+  }
+});
+
+// Handle level update
+router.put("/:id", upload.single('coverImage'), async (req, res) => {
+  let level;
+  try {
+    level = await Level.findById(req.params.id);
+    level.title = req.body.title;
+    level.description = req.body.description;
+    level.platforms = req.body.platforms;
+    level.requirements = req.body.requirements;
+
+    if (req.file != null) {
+      level.coverImage = req.file.buffer;
+      level.coverImageType = req.file.mimetype;
+    }
+
+    await level.save();
+    res.redirect(`/levels`);
+  } catch (error) {
+    console.error(error);
+    if (level == null) {
+      res.redirect("/");
+    } else {
+      res.render("levels/edit", {
+        level: level,
+        errorMessage: "Error updating level",
+      });
+    }
+  }
+});
+
+// Handle level deletion
+router.delete("/:id", async (req, res) => {
+  let level;
+  try {
+    level = await Level.findById(req.params.id);
+    await level.deleteOne();
+    res.redirect("/levels");
+  } catch (error) {
+    console.error(error);
+    if (level == null) {
+      res.redirect("/");
+    } else {
+      res.redirect(`/levels/${level.id}`);
+    }
+  }
+});
+
 
 
 module.exports = router;

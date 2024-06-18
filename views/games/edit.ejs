@@ -1,0 +1,19 @@
+<h2 class="page-header">Edit Author</h2>
+<form action="/games/<%= game.id %>?_method=PUT" method="POST">
+<div class="form-row">
+  <div class="form-item">
+    <label>Name</label>
+    <input type="text" name="title" value="<%= game.title %>" />
+    <label class="description">Description</label>
+    <textarea name="description" class="textarea-description"><%= game.description  %></textarea>
+<label>Platforms</label>
+    <input type="text" name="platforms" value="<%= game.platforms %>" />
+<label>Name</label>
+    <input type="text" name="requirements" value="<%= game.requirements %>" />
+  </div>
+</div>
+  <div class="form-row form-row-end btn-row">
+    <a class="btn btn-danger" href="/games/<%= game.id %>">Cancel</a>
+    <button class="btn btn-primary" type="submit">Update</button>
+  </div>
+</form>

@@ -1,0 +1,19 @@
+<h2 class="page-header">Edit Demon</h2>
+<form action="/demons/<%= demon.id %>?_method=PUT" method="POST">
+<div class="form-row">
+  <div class="form-item">
+    <label>Name</label>
+    <input type="text" name="title" value="<%= demon.title %>" />
+    <label class="description">Description</label>
+    <textarea name="description" class="textarea-description"><%= demon.description  %></textarea>
+<label>Platforms</label>
+    <input type="text" name="platforms" value="<%= demon.platforms %>" />
+<label>Name</label>
+    <input type="text" name="requirements" value="<%= demon.requirements %>" />
+  </div>
+</div>
+  <div class="form-row form-row-end btn-row">
+    <a class="btn btn-danger" href="/demons/<%= demon.id %>">Cancel</a>
+    <button class="btn btn-primary" type="submit">Update</button>
+  </div>
+</form>
