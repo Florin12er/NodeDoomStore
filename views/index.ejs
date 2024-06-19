@@ -1,79 +1,111 @@
-<h1>Home</h1>
-<h2 class="page-header">Search</h2>
-<form action="/" method="GET">
-  <div class="form-row">
-    <div class="form-item">
-      <label>Name</label>
-      <input type="text" name="title" value="<%= searchOptions.title ? searchOptions.title : '' %>" />
-    </div>
-  </div>
-  <div class="form-row form-row-end">
-    <button class="btn btn-primary" type="submit">Search</button>
-  </div>
-</form>
+<!DOCTYPE html>
+<html lang="en">
 
-<h2>Games:</h2>
-<ul>
-  <% games.forEach(gameItem => { %>
-    <li>
-      <h2><a href="/games?title=<%= encodeURIComponent(gameItem.title) %>"><%= gameItem.title %></a></h2>
-      <p><%= gameItem.description %></p>
-      <% if (gameItem.coverImageType && gameItem.coverImage) { %>
-        <img src="data:<%= gameItem.coverImageType %>;base64,<%= gameItem.coverImage.toString('base64') %>" alt="<%= gameItem.title %> Cover Image" style="width: 200px;">
-      <% } %>
-    </li>
-  <% }) %>
-</ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+    <h1>Home</h1>
+    <h2 class="page-header">Search</h2>
+    <form action="/" method="GET">
+        <div class="form-row">
+            <div class="form-item">
+                <label>Name</label>
+                <input type="text" name="title" value="<%= searchOptions.title ? searchOptions.title : '' %>" />
+            </div>
+        </div>
+        <div class="form-row form-row-end">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
 
-<h1>Levels:</h1>
-<ul>
-  <% levels.forEach(levelItem => { %>
-    <li>
-        <h2><a href="/levels?title=<%= encodeURIComponent(levelItem.title) %>"><%= levelItem.title %></a></h2>
-      <% if (levelItem.coverImageType && levelItem.coverImage) { %>
-        <img src="data:<%= levelItem.coverImageType %>;base64,<%= levelItem.coverImage.toString('base64') %>" alt="<%= levelItem.title %> Cover Image" style="width: 200px;">
-      <% } %>
-    </li>
-  <% }) %>
-</ul>
+    <h2>Games:</h2>
+    <ul class="subSection">
+        <% games.forEach(gameItem=> { %>
+            <li>
+                <h2><a href="/games?title=<%= encodeURIComponent(gameItem.title) %>">
+                        <%= gameItem.title %>
+                    </a></h2>
+                <p>
+                    <%= gameItem.description %>
+                </p>
+                <% if (gameItem.coverImageType && gameItem.coverImage) { %>
+                    <img src="data:<%= gameItem.coverImageType %>;base64,<%= gameItem.coverImage.toString('base64') %>"
+                        alt="<%= gameItem.title %> Cover Image" style="width: 200px;">
+                    <% } %>
+            </li>
+            <% }) %>
+    </ul>
 
-<h1>Demons:</h1>
-<ul>
-  <% demons.forEach(demonItem => { %>
-    <li>
-      <h2><a href="/demons?title=<%= encodeURIComponent(demonItem.title) %>"><%= demonItem.title %></a></h2>
-      <p><%= demonItem.description %></p>
-      <% if (demonItem.coverImageType && demonItem.coverImage) { %>
-        <img src="data:<%= demonItem.coverImageType %>;base64,<%= demonItem.coverImage.toString('base64') %>" alt="<%= demonItem.title %> Cover Image" style="width: 200px;">
-      <% } %>
-    </li>
-  <% }) %>
-</ul>
+    <h1>Levels:</h1>
+    <ul class="subSection">
+        <% levels.forEach(levelItem=> { %>
+            <li>
+                <h2><a href="/levels?title=<%= encodeURIComponent(levelItem.title) %>">
+                        <%= levelItem.title %>
+                    </a></h2>
+                <% if (levelItem.coverImageType && levelItem.coverImage) { %>
+                    <img src="data:<%= levelItem.coverImageType %>;base64,<%= levelItem.coverImage.toString('base64') %>"
+                        alt="<%= levelItem.title %> Cover Image" style="width: 200px;">
+                    <% } %>
+            </li>
+            <% }) %>
+    </ul>
 
-<h1>Source Ports:</h1>
-<ul>
-  <% source.forEach(sourcePortItem => { %>
-    <li>
-      <h2><a href="/source?title=<%= encodeURIComponent(sourcePortItem.title) %>"><%= sourcePortItem.title %></a></h2>
-      <p><%= sourcePortItem.description %></p>
-      <% if (sourcePortItem.coverImageType && sourcePortItem.coverImage) { %>
-        <img src="data:<%= sourcePortItem.coverImageType %>;base64,<%= sourcePortItem.coverImage.toString('base64') %>" alt="<%= sourcePortItem.title %> Cover Image" style="width: 200px;">
-      <% } %>
-    </li>
-  <% }) %>
-</ul>
+    <h1>Demons:</h1>
+    <ul class="subSection">
+        <% demons.forEach(demonItem=> { %>
+            <li>
+                <h2><a href="/demons?title=<%= encodeURIComponent(demonItem.title) %>">
+                        <%= demonItem.title %>
+                    </a></h2>
+                <p class="subSection-description">
+                    <%= demonItem.description %>
+                </p>
+                <% if (demonItem.coverImageType && demonItem.coverImage) { %>
+                    <img src="data:<%= demonItem.coverImageType %>;base64,<%= demonItem.coverImage.toString('base64') %>"
+                        alt="<%= demonItem.title %> Cover Image" style="width: 200px;">
+                    <% } %>
+            </li>
+            <% }) %>
+    </ul>
 
-<h1>Mods:</h1>
-<ul>
-  <% mods.forEach(modItem => { %>
-    <li>
-      <h2><a href="/mods?title=<%= encodeURIComponent(modItem.title) %>"><%= modItem.title %></a></h2>
-      <p><%= modItem.description %></p>
-      <p><strong>Requirements:</strong> <%= modItem.requirements %></p>
-      <% if (modItem.coverImageType && modItem.coverImage) { %>
-        <img src="data:<%= modItem.coverImageType %>;base64,<%= modItem.coverImage.toString('base64') %>" alt="<%= modItem.title %> Cover Image" style="width: 200px;">
-      <% } %>
-    </li>
-  <% }) %>
-</ul>
+    <h1>Source Ports:</h1>
+    <ul class="subSection">
+        <% source.forEach(sourcePortItem=> { %>
+            <li>
+                <h2><a href="/source?title=<%= encodeURIComponent(sourcePortItem.title) %>">
+                        <%= sourcePortItem.title %>
+                    </a></h2>
+                <p>
+                    <%= sourcePortItem.description %>
+                </p>
+                <% if (sourcePortItem.coverImageType && sourcePortItem.coverImage) { %>
+                    <img src="data:<%= sourcePortItem.coverImageType %>;base64,<%= sourcePortItem.coverImage.toString('base64') %>"
+                        alt="<%= sourcePortItem.title %> Cover Image" style="width: 200px;">
+                    <% } %>
+            </li>
+            <% }) %>
+    </ul>
 
+    <h1>Mods:</h1>
+    <ul class="subSection">
+        <% mods.forEach(modItem=> { %>
+            <li>
+                <h2><a href="/mods?title=<%= encodeURIComponent(modItem.title) %>">
+                        <%= modItem.title %>
+                    </a></h2>
+                <p>
+                    <%= modItem.description %>
+                </p>
+                <p><strong>Requirements:</strong>
+                    <%= modItem.requirements %>
+                </p>
+                <% if (modItem.coverImageType && modItem.coverImage) { %>
+                    <img src="data:<%= modItem.coverImageType %>;base64,<%= modItem.coverImage.toString('base64') %>"
+                        alt="<%= modItem.title %> Cover Image" style="width: 200px;">
+                    <% } %>
+            </li>
+            <% }) %>
+    </ul>

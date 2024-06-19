@@ -23,30 +23,35 @@
     </form>
     <br />
     <a href="/demons/new">Add New Demon</a>
-
-    <% if (demons.length > 0) { %>
-        <% let currentGame = null; %>
-        <% demons.forEach(demonItem => { %>
-            <% if (demonItem.game.title !== currentGame) { %>
-                <% currentGame = demonItem.game.title; %>
-                <h2><%= currentGame %>:</h2>
-            <% } %>
-                <h3><%= demonItem.title %></h3>
-                <p>Game: <%= demonItem.game.title %></p>
-                <p><%= demonItem.description %></p>
-                <% if (demonItem.coverImageType && demonItem.coverImage) { %>
-                    <img src="data:<%= demonItem.coverImageType %>;base64,<%= demonItem.coverImage.toString('base64') %>"
-                        alt="<%= demonItem.title %> Cover Image" style="width: 200px;">
-                <% } %>
-                <div>
-                    <a class="btn btn-primary" href="/demons/<%= demonItem._id %>/edit">Edit</a>
-                    <%- include('../partials/deleteForm', { url: `/demons/${demonItem._id}` }) %>
-                </div>
-        <% }) %>
-    <% } else { %>
-        <p>No demons found.</p>
-    <% } %>
+    <% if (demons.length> 0) { %>
+        <% let currentGame=null; %>
+            <% demons.forEach(demonItem=> { %>
+                <% if (demonItem.game.title !==currentGame) { %>
+                    <% currentGame=demonItem.game.title; %>
+                        <h2>
+                            <%= currentGame %>:
+                        </h2>
+                        <% } %>
+                            <h3>
+                                <%= demonItem.title %>
+                            </h3>
+                            <p>Game: <%= demonItem.game.title %>
+                            </p>
+                            <p>
+                                <%= demonItem.description %>
+                            </p>
+                            <% if (demonItem.coverImageType && demonItem.coverImage) { %>
+                                <img src="data:<%= demonItem.coverImageType %>;base64,<%= demonItem.coverImage.toString('base64') %>"
+                                    alt="<%= demonItem.title %> Cover Image" style="width: 200px;">
+                                <% } %>
+                                    <div>
+                                        <a class="btn btn-primary" href="/demons/<%= demonItem._id %>/edit">Edit</a>
+                                        <%- include('../partials/deleteForm', { url: `/demons/${demonItem._id}` }) %>
+                                    </div>
+                                    <% }) %>
+                                        <% } else { %>
+                                            <p>No demons found.</p>
+                                            <% } %>
 </body>
 
 </html>
-
