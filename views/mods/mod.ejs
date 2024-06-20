@@ -12,9 +12,10 @@
     <button class="btn btn-primary" type="submit">Search</button>
   </div>
 </form>
-<br />
-  <a href="/mods/new">Add New Mod</a>
-  <ul>
+<div class="addNew">
+  <a class="btn btn-primary" href="/mods/new">Add New Mod</a>
+  </div>
+  <ul class="subSection">
     <% mods.forEach(modsItems => { %>
       <li>
         <h2><%= modsItems.title %></h2>
@@ -24,7 +25,7 @@
         <% if (modsItems.coverImageType && modsItems.coverImage) { %>
           <img src="data:<%= modsItems.coverImageType %>;base64,<%= modsItems.coverImage.toString('base64') %>" alt="<%= modsItems.title %> Cover Image">
         <% } %>
-        <div>
+        <div class="form-row form-row-end btn-row">
           <a class="btn btn-primary" href="/mods/<%= modsItems._id %>/edit">Edit</a>
           <%- include('../partials/deleteForm', { url: `/mods/${modsItems._id}` }) %>
           </div>

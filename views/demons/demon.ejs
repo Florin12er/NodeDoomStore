@@ -21,9 +21,9 @@
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </form>
-    <br />
-    <a href="/demons/new">Add New Demon</a>
-
+        <div class="addNew">
+            <a class="btn btn-primary" href="/demons/new">Add New Demon</a>
+        </div>
     <% if (demons.length > 0) { %>
         <% let currentGame = null; %>
         <% demons.forEach(demonItem => { %>
@@ -32,8 +32,8 @@
                     </div> <!-- Close previous demon category -->
                 <% } %>
                 <% currentGame = demonItem.game.title; %>
-                    <h2 class="demon-category-title"><a href="/games?title=<%= encodeURIComponent(demonItem.game.title) %>"><%= currentGame %>:</a></h2>
-                <div class="demon-category">
+                <h2 class="demon-category-title"><a href="/games?title=<%= encodeURIComponent(demonItem.game.title) %>"><%= currentGame %>:</a></h2>
+            <div class="demon-category">
             <% } %>
                     <div class="demon-item">
                         <h3 class="demon-title"><%= demonItem.title %></h3>

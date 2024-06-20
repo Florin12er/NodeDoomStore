@@ -17,22 +17,26 @@
             </div>
             <div class="form-item">
                 <label for="description" class="description">Description</label>
-                <textarea id="description" name="description" class="textarea-description" required><%= demon.description %></textarea>
+                <textarea id="description" name="description" class="textarea-description" required>
+                    <%= demon.description %>
+                </textarea>
             </div>
             <div class="form-item">
                 <label for="game">Game</label>
                 <select id="game" name="gameId" required>
-                    <% games.forEach(game => { %>
-                        <option value="<%= game._id %>" <%= game._id.equals(demon.game) ? 'selected' : '' %>><%= game.title %></option>
-                    <% }) %>
+                    <% games.forEach(game=> { %>
+                        <option value="<%= game._id %>" <%=game._id.equals(demon.game) ? 'selected' : '' %>><%=
+                                game.title %>
+                        </option>
+                        <% }) %>
                 </select>
             </div>
-            <div class="form-item">
+            <div>
                 <label for="coverImage">Cover Image</label>
-                <% if (demon.coverImageType && demon.coverImage) { %>
-                    <img src="data:<%= demon.coverImageType %>;base64,<%= demon.coverImage.toString('base64') %>" alt="<%= demon.title %> Cover Image" style="width: 200px;">
-                <% } %>
+                    <img id="preview" src="" alt="Image Preview" />
                 <input type="file" id="coverImage" name="coverImage">
+                <button class="btn btn-primary" type="button"
+                    onclick="document.getElementById('coverImage').click()">Choose file</button>
             </div>
         </div>
         <div class="form-row form-row-end btn-row">
@@ -43,4 +47,3 @@
 </body>
 
 </html>
-

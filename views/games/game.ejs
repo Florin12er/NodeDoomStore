@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Games</title>
-</head>
-<body>
-  <h1>Games</h1>
-  <h2 class="page-header">Search Games</h2>
-  <form action="/games" method="GET">
-    <div class="form-row">
-      <div class="form-item">
-        <label>Name</label>
-        <input type="text" name="title" value="<%= searchOptions.title ? searchOptions.title : '' %>" />
-      </div>
-    </div>
-    <div class="form-row form-row-end">
-      <button class="btn btn-primary" type="submit">Search</button>
-    </div>
-  </form>
-  <br />
-  <a href="/games/new">Add New Game</a>
-  <ul class="subSection">
-    <% games.forEach(gameItem => { %>
-      <li>
-        <h2><%= gameItem.title %></h2>
-        <p><%= gameItem.description %></p>
-        <p><strong>Platforms:</strong> <%= gameItem.platforms %></p>
-        <p><strong>Requirements:</strong> <%= gameItem.requirements %></p>
-        <% if (gameItem.coverImageType && gameItem.coverImage) { %>
-          <img src="data:<%= gameItem.coverImageType %>;base64,<%= gameItem.coverImage.toString('base64') %>" alt="<%= gameItem.title %> Cover Image">
-        <% } %>
-        <div class="form-row form-row-end btn-row">
-          <a class="btn btn-primary" href="/games/<%= gameItem._id %>/edit">Edit</a>
-          <%- include('../partials/deleteForm', { url: `/games/${gameItem._id}` }) %>
-        </div>
-      </li>
-    <% }) %>
-  </ul>
-</body>
-</html>
 
+<head>
+    <title>Games</title>
+</head>
+
+<body>
+    <h1>Games</h1>
+    <h2 class="page-header">Search Games</h2>
+    <form action="/games" method="GET">
+        <div class="form-row">
+            <div class="form-item">
+                <label>Name</label>
+                <input type="text" name="title" value="<%= searchOptions.title ? searchOptions.title : '' %>" />
+            </div>
+        </div>
+        <div class="form-row form-row-end">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+    <br />
+    <div class="addNew">
+        <a class="btn btn-primary" href="/games/new">Add New Game</a>
+    </div>
+    <ul class="subSection">
+        <% games.forEach(gameItem=> { %>
+            <li>
+                <h2>
+                    <%= gameItem.title %>
+                </h2>
+                <p>
+                    <%= gameItem.description %>
+                </p>
+                <p><strong>Platforms:</strong>
+                    <%= gameItem.platforms %>
+                </p>
+                <p><strong>Requirements:</strong>
+                    <%= gameItem.requirements %>
+                </p>
+                <% if (gameItem.coverImageType && gameItem.coverImage) { %>
+                    <img name="coverImage" src="data:<%= gameItem.coverImageType %>;base64,<%= gameItem.coverImage.toString('base64') %>"
+                        alt="<%= gameItem.title %> Cover Image">
+                    <% } %>
+                        <div class="form-row form-row-end btn-row">
+                            <a class="btn btn-primary" href="/games/<%= gameItem._id %>/edit">Edit</a>
+                            <%- include('../partials/deleteForm', { url: `/games/${gameItem._id}` }) %>
+                        </div>
+            </li>
+            <% }) %>
+    </ul>
+</body>
+
+</html>

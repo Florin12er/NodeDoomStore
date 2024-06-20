@@ -6,14 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link id="main-css" rel="stylesheet" href="/stylesheets/main.css">
     <script defer src="/javascripts/imagePreview.js"></script>
-        <link rel="icon" href="images/icon.png" type="image/x-icon">
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
 </head>
 
 <body>
     <div class="container">
         <%- include("../partials/header.ejs") %>
-            <%- body %>
+        
+        <%- body %>
+
+        <footer class="footer">
+                <p>&copy; 2024 Doom Store. All rights reserved to <a href="https://github.com/Florin12er/NodeDoomStore">Florin12er</a></p>
+        </footer>
     </div>
 </body>
 
 </html>
+

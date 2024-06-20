@@ -4,31 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Game</title>
+    <title>Edit Games</title>
 </head>
 
+<body>
+    <h2 class="page-header">Edit Game</h2>
+    <form action="/games/<%= game.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-item">
+                <label for="title">Name</label>
+                <input type="text" id="title" name="title" value="<%= game.title %>" required />
 
-<title>Edit Games</title>
-<h2 class="page-header">Edit Game</h2>
-<form action="/games/<%= game.id %>?_method=PUT" method="POST">
-    <div class="form-row">
-        <div class="form-item">
-            <label>Name</label>
-            <input type="text" name="title" value="<%= game.title %>" />
-            <label class="description">Description</label>
-            <textarea name="description" class="textarea-description textarea">
-                <%= game.description %>
-            </textarea>
-            <label>Platforms</label>
-            <input name="platforms" class="textarea textarea-platforms" value="<%= game.platforms %>"
-                <label>Requirements</label>
-            <textarea type="text" class="textarea-requirements textarea" name="requirements">
-                <%= game.requirements %>
-            </textarea>
+                <label for="description" class="description">Description</label>
+                <textarea id="description" name="description" class="textarea-description textarea" required><%= game.description %></textarea>
+
+                <label for="platforms">Platforms</label>
+                <input id="platforms" name="platforms" class="textarea textarea-platforms" value="<%= game.platforms %>" required />
+
+                <label for="requirements">Requirements</label>
+                <textarea id="requirements" name="requirements" class="textarea-requirements textarea" required><%= game.requirements %></textarea>
+
+                <label for="coverImage">Cover Image</label>
+                <div>
+                    <img id="preview" src="" alt="Image Preview" style="display: none; width: 200px;"/>
+                    <input type="file" id="coverImage" name="coverImage" style="display: none;" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0]); document.getElementById('preview').style.display = 'block';">
+                    <button class="btn btn-primary" type="button" onclick="document.getElementById('coverImage').click()">Choose file</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-row form-row-end btn-row">
-        <a class="btn btn-danger" href="/games">Cancel</a>
-        <button class="btn btn-primary" type="submit">Update</button>
-    </div>
-</form>
+        <div class="form-row form-row-end btn-row">
+            <a class="btn btn-danger" href="/games">Cancel</a>
+            <button class="btn btn-primary" type="submit">Update</button>
+        </div>
+    </form>
+</body>
+
+</html>
+

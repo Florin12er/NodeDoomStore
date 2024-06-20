@@ -1,19 +1,52 @@
-<h2 class="page-header">Edit Author</h2>
-<form action="/source/<%= source.id %>?_method=PUT" method="POST">
-<div class="form-row">
-  <div class="form-item">
-    <label>Name</label>
-    <input type="text" name="title" value="<%= source.title %>" />
-    <label class="description">Description</label>
-    <textarea name="description" class="textarea-description"><%= source.description  %></textarea>
-<label>Platforms</label>
-    <input type="text" name="platforms" value="<%= source.platforms %>" />
-<label>Name</label>
-    <input type="text" name="requirements" value="<%= source.requirements %>" />
-  </div>
-</div>
-  <div class="form-row form-row-end btn-row">
-    <a class="btn btn-danger" href="/source/<%= source.id %>">Cancel</a>
-    <button class="btn btn-primary" type="submit">Update</button>
-  </div>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Source Ports</title>
+</head>
+
+<body>
+    <h2 class="page-header">Edit Source Ports</h2>
+    <form action="/source/<%= source.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-item">
+                <label for="title">Name</label>
+                <input type="text" id="title" name="title" value="<%= source.title %>" required />
+            </div>
+            <div class="form-item">
+                <label for="description" class="description">Description</label>
+                <textarea id="description" name="description" class="textarea-description" required><%= source.description %></textarea>
+            </div>
+            <div class="form-item">
+                <label for="platforms">Platforms</label>
+                <input type="text" id="platforms" name="platforms" value="<%= source.platforms %>" required />
+            </div>
+            <div class="form-item">
+                <label for="requirements">Requirements</label>
+                <textarea id="requirements" name="requirements" required><%= source.requirements %></textarea>
+            </div>
+            <div>
+                <label for="coverImage">Cover Image</label>
+                <div>
+                    <% if (source.coverImageType && source.coverImage) { %>
+                        <img id="preview" src="data:<%= source.coverImageType %>;base64,<%= source.coverImage.toString('base64') %>" alt="<%= source.title %> Cover Image" style="width: 200px;" />
+                    <% } else { %>
+                        <img id="preview" src="" alt="Image Preview" style="display: none; width: 200px;" />
+                    <% } %>
+                    <input type="file" id="coverImage" name="coverImage" style="display: none;" 
+                        onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0]); document.getElementById('preview').style.display = 'block';">
+                    <button class="btn btn-primary" type="button" onclick="document.getElementById('coverImage').click()">Choose file</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-row form-row-end btn-row">
+            <a class="btn btn-danger" href="/source">Cancel</a>
+            <button class="btn btn-primary" type="submit">Update</button>
+        </div>
+    </form>
+</body>
+
+</html>
+

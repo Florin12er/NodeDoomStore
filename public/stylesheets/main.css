@@ -1,5 +1,7 @@
+/* Import Fonts */
 @import "../fonts/stylesheet.css";
 
+/* Root Variables */
 :root {
     --doom-dark-bg: #2d2d2d;
     --doom-light-bg: #3e3e3e;
@@ -16,6 +18,7 @@
     margin: 0;
 }
 
+/* General Styles */
 *,
 *::before,
 *::after {
@@ -37,21 +40,35 @@ body {
     margin: 10px;
     background-color: var(--doom-light-bg);
 }
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 3rem;
+    background-color: var(--doom-light-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    border: 2px solid var(--doom-border);
+}
+
+/* Buttons */
 .btn-row {
     display: flex;
     margin-top: 1rem;
     gap: 1rem;
 }
 
-.btn{
+.btn {
     font-size: 20px;
     padding: 15px;
     height: 50px;
     border: none;
     cursor: pointer;
     background-color: var(--doom-accent);
-        transition: background-color 0.3s;
+    color: var(--doom-dark-bg);
+    transition: background-color 0.3s;
     text-align: center;
+    text-decoration: none;
 }
 
 .btn:hover {
@@ -64,26 +81,39 @@ body {
     color: var(--doom-text);
 }
 
+/* Add New Section */
+.addNew {
+    display: flex;
+    justify-content: flex-end;
+}
 
+.addNew a {
+    margin-top: 1rem;
+    text-decoration: none;
+}
+
+/* Sub Sections */
 .subSection {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
 }
 
-.subSection a {
+.home-header {
     text-decoration: none;
     color: var(--doom-text);
 }
-.subSection a:hover {
+
+.home-header:hover {
     color: var(--doom-hover);
 }
 
 .subSection p {
     width: 500px;
 }
+
 .subSection img {
-    width: 250px; 
+    width: 250px;
     height: fit-content;
 }
 
@@ -94,17 +124,7 @@ body {
     list-style: none;
 }
 
-.container {
-    max-width: 1200px;
-    margin: auto;
-    margin-bottom: 3rem;
-    background-color: var(--doom-light-bg);
-    padding: 1rem;
-    border-radius: 5px;
-    border: 2px solid var(--doom-border);
-}
-
-/* form */
+/* Form Styles */
 .form-item {
     display: flex;
     flex-direction: column;
@@ -150,8 +170,7 @@ input[type="file"] {
     justify-content: end;
 }
 
-
-/* header */
+/* Header Styles */
 .header {
     display: flex;
     gap: 2rem;
@@ -171,6 +190,7 @@ input[type="file"] {
     color: var(--doom-text);
     text-decoration: none;
 }
+
 .header a:hover {
     color: var(--doom-hover);
 }
@@ -179,6 +199,7 @@ input[type="file"] {
     list-style: none;
 }
 
+/* Categories */
 .categories {
     display: flex;
     gap: 2rem;
@@ -186,15 +207,23 @@ input[type="file"] {
     margin: 0;
 }
 
-/*Demon Page*/
+/* Demon Page */
 .demon-category {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+.demon-item {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
 .demon-category-title a {
     text-decoration: none;
     color: var(--doom-text);
 }
+
 .demon-category-title a:hover {
     color: var(--doom-hover);
 }
@@ -204,14 +233,21 @@ input[type="file"] {
     height: auto;
 }
 
+/* Action Buttons */
 .action-buttons {
     margin-top: 10px;
 }
 
-/*Levels Page*/
+/* Levels Page */
 .level-category {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.level-item {
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
 .level-image {
@@ -219,10 +255,19 @@ input[type="file"] {
     height: auto;
 }
 
-.action-buttons {
-    margin-top: 10px;
+/*Footer*/
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+footer a {
+    text-decoration: none;
+    color: var(--doom-danger);
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
     body {
         font-size: 18px;

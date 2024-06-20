@@ -21,9 +21,9 @@
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </form>
-    <br />
-    <a href="/levels/new">Add New Level</a>
-
+        <div class="addNew">
+            <a class="btn btn-primary" href="/levels/new">Add New Level</a>
+        </div>
     <% if (levels.length > 0) { %>
         <% let currentGame = null; %>
         <% levels.forEach(levelItem => { %>
@@ -32,7 +32,8 @@
                     </div> <!-- Close previous level category -->
                 <% } %>
                 <% currentGame = levelItem.game.title; %>
-        <h2><a href="/games?title=<%= encodeURIComponent(levelItem.game.title) %>"><%= currentGame %>:</a></h2>
+        <h2 class="demon-category-title"><a href="/games?title=<%= encodeURIComponent(levelItem.game.title) %>"><%= currentGame %>:</a></h2>
+
                 <div class="level-category">
             <% } %>
                     <div class="level-item">
@@ -42,7 +43,7 @@
                         <% if (levelItem.coverImageType && levelItem.coverImage) { %>
                             <img class="level-image" src="data:<%= levelItem.coverImageType %>;base64,<%= levelItem.coverImage.toString('base64') %>" alt="<%= levelItem.title %> Cover Image">
                         <% } %>
-                        <div class="action-buttons">
+                        <div class="form-row form-row-end btn-row">
                             <a class="btn btn-primary" href="/levels/<%= levelItem._id %>/edit">Edit</a>
                             <%- include('../partials/deleteForm', { url: `/levels/${levelItem._id}` }) %>
                         </div>

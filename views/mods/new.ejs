@@ -29,13 +29,11 @@
                         </div>
                         <div>
                             <label for="compatibility">Compatibility</label>
-                            <textarea id="compatibility" name="compatibility" required>
-                                <%= mods.compatibility %>
-                            </textarea>
+                            <input id="compatibility" name="compatibility" required value="<%= mods.compatibility %>"/>
                         </div>
                         <div>
                             <label for="requirements">Requirements</label>
-                            <input type="text" id="requirements" name="requirements" value="<%= mods.requirements %>">
+                            <textarea type="text" id="requirements" name="requirements"><%= mods.requirements %></textarea>
                         </div>
                         <div>
                             <img id="preview" src="" alt="Image Preview" />
