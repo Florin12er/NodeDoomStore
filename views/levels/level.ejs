@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Levels</title>
-</head>
+    </head>
 
 <body>
     <h1>Levels:</h1>
@@ -28,24 +28,31 @@
         <% let currentGame = null; %>
         <% levels.forEach(levelItem => { %>
             <% if (levelItem.game.title !== currentGame) { %>
-                <% currentGame = levelItem.game.title; %>
-                <h2><%= currentGame %>:</h2>
-            <% } %>
-                <h3><%= levelItem.title %></h3>
-                <p>Game: <%= levelItem.game.title %></p>
-                <p><%= levelItem.description %></p>
-                <% if (levelItem.coverImageType && levelItem.coverImage) { %>
-                    <img src="data:<%= levelItem.coverImageType %>;base64,<%= levelItem.coverImage.toString('base64') %>"
-                        alt="<%= levelItem.title %> Cover Image" style="width: 200px;">
+                <% if (currentGame !== null) { %>
+                    </div> <!-- Close previous level category -->
                 <% } %>
-                <div>
-                    <a class="btn btn-primary" href="/levels/<%= levelItem._id %>/edit">Edit</a>
-                    <%- include('../partials/deleteForm', { url: `/levels/${levelItem._id}` }) %>
-                </div>
-        <% }) %>
+                <% currentGame = levelItem.game.title; %>
+                    <h2><%= currentGame %>:</h2>
+                <div class="level-category">
+            <% } %>
+                    <div class="level-item">
+                        <h3 class="level-title"><%= levelItem.title %></h3>
+                        <p class="level-description">Game: <%= levelItem.game.title %></p>
+                        <p class="level-description"><%= levelItem.description %></p>
+                        <% if (levelItem.coverImageType && levelItem.coverImage) { %>
+                            <img class="level-image" src="data:<%= levelItem.coverImageType %>;base64,<%= levelItem.coverImage.toString('base64') %>" alt="<%= levelItem.title %> Cover Image">
+                        <% } %>
+                        <div class="action-buttons">
+                            <a class="btn btn-primary" href="/levels/<%= levelItem._id %>/edit">Edit</a>
+                            <%- include('../partials/deleteForm', { url: `/levels/${levelItem._id}` }) %>
+                        </div>
+                    </div> <!-- Close level-item -->
+        <% }); %>
+                </div> <!-- Close final level category -->
     <% } else { %>
         <p>No levels found.</p>
     <% } %>
+
 </body>
 
 </html>

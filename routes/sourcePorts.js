@@ -54,7 +54,7 @@ router.post("/", upload.single('coverImage'), async (req, res) => {
     const newSourcePort = await source.save();
     res.redirect("source");
   } catch {
-    res.render("source/new", {
+    res.render("sourcePorts/new", {
       source: source,
       errorMessage: "Error creating source. Make sure to fill all fields.",
     });
@@ -64,7 +64,7 @@ router.post("/", upload.single('coverImage'), async (req, res) => {
 router.get("/:id/edit", async (req, res) => {
   try {
     const source = await SourcePort.findById(req.params.id);
-    res.render("source/edit", { source: source });
+    res.render("sourcePorts/edit", { source: source });
   } catch (error) {
     console.error(error);
     res.redirect("/source");

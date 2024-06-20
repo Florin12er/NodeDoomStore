@@ -10,35 +10,49 @@
 <body>
     <h1>Add New Level</h1>
     <% if (locals.errorMessage) { %>
-        <p><%= locals.errorMessage %></p>
-    <% } %>
-    <form action="/levels" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" value="<%= level.title %>" required>
-        </div>
-        <div>
-            <label for="description">Description</label>
-            <textarea id="description" name="description" required><%= level.description %></textarea>
-        </div>
-        <div>
-            <label for="game">Game</label>
-            <select id="game" name="game" required>
-                <% games.forEach(game => { %>
-                    <option value="<%= game._id %>"><%= game.title %></option>
-                <% }) %>
-            </select>
-        </div>
-        <div>
-            <label for="coverImage">Cover Image</label>
-            <img id="preview" src="" alt="Image Preview" />
-            <input type="file" id="coverimage" name="coverImage">
-        </div>
-        <div>
-            <button type="submit">Add Level</button>
-        </div>
-    </form>
+        <p>
+            <%= locals.errorMessage %>
+        </p>
+        <% } %>
+            <div class="form-row">
+                <div class="form-item">
+                    <form action="/levels" method="POST" enctype="multipart/form-data">
+                        <div>
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" value="<%= level.title %>" required>
+                        </div>
+                        <div>
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" required>
+                                <%= level.description %>
+                            </textarea>
+                        </div>
+                        <div>
+                            <label for="game">Game</label>
+                            <select id="game" name="game" required>
+                                <% games.forEach(game=> { %>
+                                    <option value="<%= game._id %>">
+                                        <%= game.title %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </div>
+                        <div>
+                            <img id="preview" src="" alt="Image Preview" />
+                            <input type="file" id="coverImage" name="coverImage">
+                            <button class="btn btn-primary"
+                                onclick="document.getElementById('coverImage').click()">Choose
+                                file</button>
+                        </div>
+                        <div>
+                         <div class="form-row form-row-end btn-row">
+                            <button class="btn btn-primary" type="submit">Add Mods</button>
+                            <a href="/levels" class="btn btn-danger">Cancel</a>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 </body>
 
 </html>
-

@@ -1,4 +1,4 @@
-const fileInput = document.getElementById("coverimage");
+const fileInput = document.getElementById("coverImage");
 const preview = document.getElementById("preview");
 
 fileInput.addEventListener("change", (e) => {

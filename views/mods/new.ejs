@@ -14,36 +14,44 @@
             <%= locals.errorMessage %>
         </p>
         <% } %>
-            <form action="/mods" method="POST" enctype="multipart/form-data">
-                <div>
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" value="<%= mods.title %>" required>
+            <div class="form-row">
+                <div class="form-item">
+                    <form action="/mods" method="POST" enctype="multipart/form-data">
+                        <div>
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" value="<%= mods.title %>" required>
+                        </div>
+                        <div>
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" required>
+                                <%= mods.description %>
+                            </textarea>
+                        </div>
+                        <div>
+                            <label for="compatibility">Compatibility</label>
+                            <textarea id="compatibility" name="compatibility" required>
+                                <%= mods.compatibility %>
+                            </textarea>
+                        </div>
+                        <div>
+                            <label for="requirements">Requirements</label>
+                            <input type="text" id="requirements" name="requirements" value="<%= mods.requirements %>">
+                        </div>
+                        <div>
+                            <img id="preview" src="" alt="Image Preview" />
+                            <input type="file" id="coverImage" name="coverImage">
+                            <button class="btn btn-primary"
+                                onclick="document.getElementById('coverImage').click()">Choose
+                                file</button>
+
+                        </div>
+                        <div class="form-row form-row-end btn-row">
+                            <button class="btn btn-primary" type="submit">Add Mods</button>
+                            <a href="/mods" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" required>
-                        <%= mods.description %>
-                    </textarea>
-                </div>
-                <div>
-                    <label for="compatibility">Compatibility</label>
-                    <textarea id="compatibility" name="compatibility" required>
-                        <%= mods.compatibility %>
-                    </textarea>
-                </div>
-                <div>
-                    <label for="requirements">Requirements</label>
-                    <input type="text" id="requirements" name="requirements" value="<%= mods.requirements %>">
-                </div>
-                <div>
-                    <label for="coverImage">Cover Image</label>
-                    <img id="preview" src="" alt="Image Preview" />
-                    <input type="file" id="coverimage" name="coverImage">
-                </div>
-                <div>
-                    <button type="submit">Add Mods </button>
-                </div>
-            </form>
+            </div>
 </body>
 
 </html>
