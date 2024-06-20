@@ -32,7 +32,7 @@
                     </div> <!-- Close previous demon category -->
                 <% } %>
                 <% currentGame = demonItem.game.title; %>
-                    <h2><%= currentGame %>:</h2>
+                    <h2 class="demon-category-title"><a href="/games?title=<%= encodeURIComponent(demonItem.game.title) %>"><%= currentGame %>:</a></h2>
                 <div class="demon-category">
             <% } %>
                     <div class="demon-item">
@@ -42,7 +42,7 @@
                         <% if (demonItem.coverImageType && demonItem.coverImage) { %>
                             <img class="demon-image" src="data:<%= demonItem.coverImageType %>;base64,<%= demonItem.coverImage.toString('base64') %>" alt="<%= demonItem.title %> Cover Image">
                         <% } %>
-                        <div class="action-buttons">
+                        <div class="form-row form-row-end btn-row">
                             <a class="btn btn-primary" href="/demons/<%= demonItem._id %>/edit">Edit</a>
                             <%- include('../partials/deleteForm', { url: `/demons/${demonItem._id}` }) %>
                         </div>

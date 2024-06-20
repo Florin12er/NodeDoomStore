@@ -27,9 +27,9 @@
         <p><strong>Platforms:</strong> <%= gameItem.platforms %></p>
         <p><strong>Requirements:</strong> <%= gameItem.requirements %></p>
         <% if (gameItem.coverImageType && gameItem.coverImage) { %>
-          <img src="data:<%= gameItem.coverImageType %>;base64,<%= gameItem.coverImage.toString('base64') %>" alt="<%= gameItem.title %> Cover Image" style="width: 200px;">
+          <img src="data:<%= gameItem.coverImageType %>;base64,<%= gameItem.coverImage.toString('base64') %>" alt="<%= gameItem.title %> Cover Image">
         <% } %>
-        <div>
+        <div class="form-row form-row-end btn-row">
           <a class="btn btn-primary" href="/games/<%= gameItem._id %>/edit">Edit</a>
           <%- include('../partials/deleteForm', { url: `/games/${gameItem._id}` }) %>
         </div>

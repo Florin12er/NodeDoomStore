@@ -30,7 +30,7 @@
             <div class="form-item">
                 <label for="coverImage">Cover Image</label>
                 <% if (level.coverImageType && level.coverImage) { %>
-                    <img src="data:<%= level.coverImageType %>;base64,<%= level.coverImage.toString('base64') %>" alt="<%= level.title %> Cover Image" style="width: 200px;">
+                    <img src="data:<%= level.coverImageType %>;base64,<%= level.coverImage.toString('base64') %>" alt="<%= level.title %> Cover Image" >
                 <% } %>
                 <input type="file" id="coverImage" name="coverImage">
             </div>

@@ -37,6 +37,33 @@ body {
     margin: 10px;
     background-color: var(--doom-light-bg);
 }
+.btn-row {
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.btn{
+    font-size: 20px;
+    padding: 15px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--doom-accent);
+        transition: background-color 0.3s;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: var(--doom-hover);
+}
+
+.btn-danger {
+    text-decoration: none;
+    background-color: var(--doom-danger);
+    color: var(--doom-text);
+}
+
 
 .subSection {
     display: grid;
@@ -44,11 +71,26 @@ body {
     gap: 2rem;
 }
 
+.subSection a {
+    text-decoration: none;
+    color: var(--doom-text);
+}
+.subSection a:hover {
+    color: var(--doom-hover);
+}
+
 .subSection p {
     width: 500px;
 }
+.subSection img {
+    width: 250px; 
+    height: fit-content;
+}
 
 .subSection li {
+    display: grid;
+    justify-content: center;
+    align-items: center;
     list-style: none;
 }
 
@@ -108,32 +150,6 @@ input[type="file"] {
     justify-content: end;
 }
 
-.btn-row {
-    display: flex;
-    margin-top: 1rem;
-    gap: 1rem;
-}
-
-.btn {
-    font-size: 20px;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    background-color: var(--doom-accent);
-    color: var(--doom-dark-bg);
-    transition: background-color 0.3s;
-    text-align: center;
-}
-
-.btn:hover {
-    background-color: var(--doom-hover);
-}
-
-.btn-danger {
-    text-decoration: none;
-    background-color: var(--doom-danger);
-    color: var(--doom-text);
-}
 
 /* header */
 .header {
@@ -155,6 +171,9 @@ input[type="file"] {
     color: var(--doom-text);
     text-decoration: none;
 }
+.header a:hover {
+    color: var(--doom-hover);
+}
 
 .header li {
     list-style: none;
@@ -171,6 +190,13 @@ input[type="file"] {
 .demon-category {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+.demon-category-title a {
+    text-decoration: none;
+    color: var(--doom-text);
+}
+.demon-category-title a:hover {
+    color: var(--doom-hover);
 }
 
 .demon-image {

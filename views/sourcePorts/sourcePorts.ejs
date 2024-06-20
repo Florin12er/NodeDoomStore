@@ -17,7 +17,7 @@ A Doom source port is a modernized version of the original Doom game engine, des
 </form>
 <br />
   <a href="/source/new">Add New Source Port</a>
-  <ul>
+  <ul class="subSection">
     <% source.forEach(sourcePortItem => { %>
       <li>
         <h2><%= sourcePortItem.title %></h2>
@@ -25,9 +25,9 @@ A Doom source port is a modernized version of the original Doom game engine, des
         <p><strong>Platforms:</strong> <%= sourcePortItem.platforms %></p>
         <p><strong>Requirements:</strong> <%= sourcePortItem.requirements %></p>
         <% if (sourcePortItem.coverImageType && sourcePortItem.coverImage) { %>
-          <img src="data:<%= sourcePortItem.coverImageType %>;base64,<%= sourcePortItem.coverImage.toString('base64') %>" alt="<%= sourcePortItem.title %> Cover Image" style="width: 200px;">
+          <img src="data:<%= sourcePortItem.coverImageType %>;base64,<%= sourcePortItem.coverImage.toString('base64') %>" alt="<%= sourcePortItem.title %> Cover Image">
         <% } %>
-        <div>
+        <div class="form-row form-row-end btn-row">
           <a class="btn btn-primary" href="/source/<%= sourcePortItem._id %>/edit">Edit</a>
           <%- include('../partials/deleteForm', { url: `/source/${sourcePortItem._id}` }) %>
         </div>

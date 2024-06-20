@@ -32,7 +32,7 @@
                     </div> <!-- Close previous level category -->
                 <% } %>
                 <% currentGame = levelItem.game.title; %>
-                    <h2><%= currentGame %>:</h2>
+        <h2><a href="/games?title=<%= encodeURIComponent(levelItem.game.title) %>"><%= currentGame %>:</a></h2>
                 <div class="level-category">
             <% } %>
                     <div class="level-item">
