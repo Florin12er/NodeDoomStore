@@ -249,6 +249,13 @@ input[type="file"] {
     justify-content: center;
     align-items: center;
 }
+.level-category-title a {
+    text-decoration: none;
+    color: var(--doom-text);
+}
+.level-category-title a:hover {
+    color: var(--doom-hover);
+}
 
 .level-image {
     max-width: 200px;

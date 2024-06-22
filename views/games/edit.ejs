@@ -16,19 +16,26 @@
                 <input type="text" id="title" name="title" value="<%= game.title %>" required />
 
                 <label for="description" class="description">Description</label>
-                <textarea id="description" name="description" class="textarea-description textarea" required><%= game.description %></textarea>
+                <textarea id="description" name="description" class="textarea-description textarea" required>
+                    <%= game.description %>
+                </textarea>
 
                 <label for="platforms">Platforms</label>
-                <input id="platforms" name="platforms" class="textarea textarea-platforms" value="<%= game.platforms %>" required />
+                <input id="platforms" name="platforms" class="textarea textarea-platforms" value="<%= game.platforms %>"
+                    required />
 
                 <label for="requirements">Requirements</label>
-                <textarea id="requirements" name="requirements" class="textarea-requirements textarea" required><%= game.requirements %></textarea>
+                <textarea id="requirements" name="requirements" class="textarea-requirements textarea" required>
+                    <%= game.requirements %>
+                </textarea>
 
                 <label for="coverImage">Cover Image</label>
                 <div>
-                    <img id="preview" src="" alt="Image Preview" style="display: none; width: 200px;"/>
-                    <input type="file" id="coverImage" name="coverImage" style="display: none;" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0]); document.getElementById('preview').style.display = 'block';">
-                    <button class="btn btn-primary" type="button" onclick="document.getElementById('coverImage').click()">Choose file</button>
+                    <img id="preview" src="" alt="Image Preview" style="display: none; width: 200px;" />
+                    <input type="file" id="coverImage" name="coverImage" style="display: none;"
+                        onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0]); document.getElementById('preview').style.display = 'block';">
+                    <button class="btn btn-primary" type="button"
+                        onclick="document.getElementById('coverImage').click()">Choose file</button>
                 </div>
             </div>
         </div>
@@ -40,4 +47,3 @@
 </body>
 
 </html>
-

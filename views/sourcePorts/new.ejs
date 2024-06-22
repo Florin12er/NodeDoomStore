@@ -37,15 +37,18 @@
                             <textarea type="text" id="requirements" name="requirements"><%= source.requirements %></textarea>
                         </div>
                         <div>
-                            <img id="preview" src="" alt="Image Preview" />
-                            <input type="file" id="coverImage" name="coverImage">
-                            <button class="btn btn-primary"
-                                onclick="document.getElementById('coverImage').click()">Choose
-                                file</button>
+                         <% if (source.coverImage && source.coverImageType) { %>
+                        <img id="preview" src="data:<%= source.coverImageType %>;base64,<%= source.coverImage.toString('base64') %>" alt="<%= source.title %> Cover Image" style="width: 200px;" />
+                    <% } else { %>
+                        <img id="preview" alt="Cover Image Preview" style="width: 200px;" />
+                    <% } %>
+                    <input type="file" id="coverImage" name="coverImage">
+                    <button class="btn btn-primary" type="button" onclick="document.getElementById('coverImage').click()">Choose file</button>
+
                         </div>
                         <div>
                          <div class="form-row form-row-end btn-row">
-                            <button class="btn btn-primary" type="submit">Add Mods</button>
+                            <button class="btn btn-primary" type="submit">Add Source Port</button>
                             <a href="/source" class="btn btn-danger">Cancel</a>
                         </div>
                         </div>

@@ -10,46 +10,46 @@
 <body>
     <h1>Add New Game</h1>
     <% if (locals.errorMessage) { %>
-        <p>
-            <%= locals.errorMessage %>
-        </p>
-        <% } %>
-            <div class="form-row">
-                <div class="form-item">
-                    <form action="/games" method="POST" enctype="multipart/form-data">
-                        <div>
-                            <label for="title">Title</label>
-                            <input type="text" id="title" name="title" value="<%= game.title %>" required>
-                        </div>
-                        <div>
-                            <label for="description">Description</label>
-                            <textarea id="description" name="description" required>
-                                <%= game.description %>
-                            </textarea>
-                        </div>
-                        <div>
-                            <label for="platforms">Platforms</label>
-                            <input type="text" id="platforms" name="platforms" value="<%= game.platforms %>">
-                        </div>
-                        <div>
-                            <label for="requirements">Requirements</label>
-                            <textarea type="text" id="requirements" name="requirements"><%= game.requirements %></textarea>
-                        </div>
-                        <div>
-                            <img id="preview" src="" alt="Image Preview" />
-                            <input type="file" id="coverImage" name="coverImage">
-                            <button class="btn btn-primary" onclick="document.getElementById('coverImage').click()">Choose
-                                file</button>
-                        </div>
-                        <div>
-                            <div class="form-row form-row-end btn-row">
-                                <button class="btn btn-primary" type="submit">Add Game</button>
-                                <a href="/games" class="btn btn-danger">Cancel</a>
-                            </div>
-                        </div>
-                    </form>
+        <p><%= locals.errorMessage %></p>
+    <% } %>
+    <div class="form-row">
+        <div class="form-item">
+            <form action="/games" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" value="<%= game.title %>" required>
                 </div>
-            </div>
+                <div>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" required><%= game.description %></textarea>
+                </div>
+                <div>
+                    <label for="platforms">Platforms</label>
+                    <input type="text" id="platforms" name="platforms" value="<%= game.platforms %>">
+                </div>
+                <div>
+                    <label for="requirements">Requirements</label>
+                    <textarea id="requirements" name="requirements"><%= game.requirements %></textarea>
+                </div>
+                <div>
+                    <% if (game.coverImage && game.coverImageType) { %>
+                        <img id="preview" src="data:<%= game.coverImageType %>;base64,<%= game.coverImage.toString('base64') %>" alt="<%= game.title %> Cover Image" style="width: 200px;" />
+                    <% } else { %>
+                        <img id="preview" alt="Cover Image Preview" style="width: 200px;" />
+                    <% } %>
+                    <input type="file" id="coverImage" name="coverImage">
+                    <button class="btn btn-primary" type="button" onclick="document.getElementById('coverImage').click()">Choose file</button>
+                </div>
+                <div>
+                    <div class="form-row form-row-end btn-row">
+                        <button class="btn btn-primary" type="submit">Add Game</button>
+                        <a href="/games" class="btn btn-danger">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
+

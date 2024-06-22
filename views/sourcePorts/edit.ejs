@@ -30,7 +30,7 @@
             <div>
                 <label for="coverImage">Cover Image</label>
                 <div>
-                    <% if (source.coverImageType && source.coverImage) { %>
+                   <% if (source.coverImageType && source.coverImage) { %>
                         <img id="preview" src="data:<%= source.coverImageType %>;base64,<%= source.coverImage.toString('base64') %>" alt="<%= source.title %> Cover Image" style="width: 200px;" />
                     <% } else { %>
                         <img id="preview" src="" alt="Image Preview" style="display: none; width: 200px;" />

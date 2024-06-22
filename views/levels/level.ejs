@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Levels</title>
-    </head>
+</head>
 
 <body>
     <h1>Levels:</h1>
@@ -13,43 +13,45 @@
     <form action="/levels" method="GET">
         <div class="form-row">
             <div class="form-item">
-                <label>Name</label>
-                <input type="text" name="title" value="<%= searchOptions.title %>" />
+                <label for="title">Name</label>
+                <input type="text" id="title" name="title" value="<%= searchOptions.title %>" />
             </div>
         </div>
         <div class="form-row form-row-end">
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </form>
-        <div class="addNew">
-            <a class="btn btn-primary" href="/levels/new">Add New Level</a>
-        </div>
+    <div class="addNew">
+        <a class="btn btn-primary" href="/levels/new">Add New Level</a>
+    </div>
+    
     <% if (levels.length > 0) { %>
         <% let currentGame = null; %>
         <% levels.forEach(levelItem => { %>
-            <% if (levelItem.game.title !== currentGame) { %>
+            <% if (levelItem.game && levelItem.game.title !== currentGame) { %>
                 <% if (currentGame !== null) { %>
                     </div> <!-- Close previous level category -->
                 <% } %>
                 <% currentGame = levelItem.game.title; %>
-        <h2 class="demon-category-title"><a href="/games?title=<%= encodeURIComponent(levelItem.game.title) %>"><%= currentGame %>:</a></h2>
-
+                <h2 class="level-category-title">
+                    <a href="/games?title=<%= encodeURIComponent(levelItem.game.title) %>"><%= currentGame %>:</a>
+                </h2>
                 <div class="level-category">
             <% } %>
-                    <div class="level-item">
-                        <h3 class="level-title"><%= levelItem.title %></h3>
-                        <p class="level-description">Game: <%= levelItem.game.title %></p>
-                        <p class="level-description"><%= levelItem.description %></p>
-                        <% if (levelItem.coverImageType && levelItem.coverImage) { %>
-                            <img class="level-image" src="data:<%= levelItem.coverImageType %>;base64,<%= levelItem.coverImage.toString('base64') %>" alt="<%= levelItem.title %> Cover Image">
-                        <% } %>
-                        <div class="form-row form-row-end btn-row">
-                            <a class="btn btn-primary" href="/levels/<%= levelItem._id %>/edit">Edit</a>
-                            <%- include('../partials/deleteForm', { url: `/levels/${levelItem._id}` }) %>
-                        </div>
-                    </div> <!-- Close level-item -->
+            <div class="level-item">
+                <h3 class="level-title"><%= levelItem.title %></h3>
+                <p class="level-description">Game: <%= levelItem.game ? levelItem.game.title : 'Unknown' %></p>
+                <p class="level-description"><%= levelItem.description %></p>
+                <% if (levelItem.coverImageType && levelItem.coverImage) { %>
+                    <img class="level-image" src="data:<%= levelItem.coverImageType %>;base64,<%= levelItem.coverImage.toString('base64') %>" alt="<%= levelItem.title %> Cover Image">
+                <% } %>
+                <div class="form-row form-row-end btn-row">
+                    <a class="btn btn-primary" href="/levels/<%= levelItem._id %>/edit">Edit</a>
+                    <%- include('../partials/deleteForm', { url: `/levels/${levelItem._id}` }) %>
+                </div>
+            </div> <!-- Close level-item -->
         <% }); %>
-                </div> <!-- Close final level category -->
+        </div> <!-- Close final level category -->
     <% } else { %>
         <p>No levels found.</p>
     <% } %>

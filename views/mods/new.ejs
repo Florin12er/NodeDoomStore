@@ -36,11 +36,15 @@
                             <textarea type="text" id="requirements" name="requirements"><%= mods.requirements %></textarea>
                         </div>
                         <div>
-                            <img id="preview" src="" alt="Image Preview" />
-                            <input type="file" id="coverImage" name="coverImage">
-                            <button class="btn btn-primary"
-                                onclick="document.getElementById('coverImage').click()">Choose
-                                file</button>
+                        <% if (mods.coverImage && mods.coverImageType) { %>
+                        <img id="preview" src="data:<%= mods.coverImageType %>;base64,<%= mods.coverImage.toString('base64') %>" alt="<%= mods.title %> Cover Image" style="width: 200px;" />
+                    <% } else { %>
+                        <img id="preview" alt="Cover Image Preview" style="width: 200px;" />
+                    <% } %>
+                    <input type="file" id="coverImage" name="coverImage">
+                    <button class="btn btn-primary" type="button" onclick="document.getElementById('coverImage').click()">Choose file</button>
+
+
 
                         </div>
                         <div class="form-row form-row-end btn-row">

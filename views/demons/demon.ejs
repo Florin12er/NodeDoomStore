@@ -13,42 +13,45 @@
     <form action="/demons" method="GET">
         <div class="form-row">
             <div class="form-item">
-                <label>Name</label>
-                <input type="text" name="title" value="<%= searchOptions.title %>" />
+                <label for="title">Name</label>
+                <input type="text" id="title" name="title" value="<%= searchOptions.title %>" />
             </div>
         </div>
         <div class="form-row form-row-end">
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </form>
-        <div class="addNew">
-            <a class="btn btn-primary" href="/demons/new">Add New Demon</a>
-        </div>
+    <div class="addNew">
+        <a class="btn btn-primary" href="/demons/new">Add New Demon</a>
+    </div>
+    
     <% if (demons.length > 0) { %>
         <% let currentGame = null; %>
         <% demons.forEach(demonItem => { %>
-            <% if (demonItem.game.title !== currentGame) { %>
+            <% if (demonItem.game && demonItem.game.title !== currentGame) { %>
                 <% if (currentGame !== null) { %>
                     </div> <!-- Close previous demon category -->
                 <% } %>
                 <% currentGame = demonItem.game.title; %>
-                <h2 class="demon-category-title"><a href="/games?title=<%= encodeURIComponent(demonItem.game.title) %>"><%= currentGame %>:</a></h2>
-            <div class="demon-category">
+                <h2 class="demon-category-title">
+                    <a href="/games?title=<%= encodeURIComponent(demonItem.game.title) %>"><%= currentGame %>:</a>
+                </h2>
+                <div class="demon-category">
             <% } %>
-                    <div class="demon-item">
-                        <h3 class="demon-title"><%= demonItem.title %></h3>
-                        <p class="demon-description">Game: <%= demonItem.game.title %></p>
-                        <p class="demon-description"><%= demonItem.description %></p>
-                        <% if (demonItem.coverImageType && demonItem.coverImage) { %>
-                            <img class="demon-image" src="data:<%= demonItem.coverImageType %>;base64,<%= demonItem.coverImage.toString('base64') %>" alt="<%= demonItem.title %> Cover Image">
-                        <% } %>
-                        <div class="form-row form-row-end btn-row">
-                            <a class="btn btn-primary" href="/demons/<%= demonItem._id %>/edit">Edit</a>
-                            <%- include('../partials/deleteForm', { url: `/demons/${demonItem._id}` }) %>
-                        </div>
-                    </div> <!-- Close demon-item -->
+            <div class="demon-item">
+                <h3 class="demon-title"><%= demonItem.title %></h3>
+                <p class="demon-description">Game: <%= demonItem.game ? demonItem.game.title : 'Unknown' %></p>
+                <p class="demon-description"><%= demonItem.description %></p>
+                <% if (demonItem.coverImageType && demonItem.coverImage) { %>
+                    <img class="demon-image" src="data:<%= demonItem.coverImageType %>;base64,<%= demonItem.coverImage.toString('base64') %>" alt="<%= demonItem.title %> Cover Image">
+                <% } %>
+                <div class="form-row form-row-end btn-row">
+                    <a class="btn btn-primary" href="/demons/<%= demonItem._id %>/edit">Edit</a>
+                    <%- include('../partials/deleteForm', { url: `/demons/${demonItem._id}` }) %>
+                </div>
+            </div> <!-- Close demon-item -->
         <% }); %>
-                </div> <!-- Close final demon category -->
+        </div> <!-- Close final demon category -->
     <% } else { %>
         <p>No demons found.</p>
     <% } %>
